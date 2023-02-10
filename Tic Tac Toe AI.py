@@ -153,50 +153,6 @@ def unbeatable_bot():  # Minimax AI
     check_move(player2, best_move)
     return
 
-def minimax_help(board, maximizing):  # Minimax function
-    if can_win(player2):  # checks if the AI can win
-        return 1
-    elif can_win(player1):  # checks if the Player can win
-        return -1
-    elif check_draw():  # Checks if no one can win
-        return 0
-
-    if maximizing:
-        best_score = -10
-        for key in board.keys():
-            if board[key] == ' ':
-                board[key] = player1
-                score = minimax_help(board, False)  # not maximising
-                board[key] = ' '
-                if score > best_score:
-                    best_score = score
-        return best_score
-
-    else:  # not maximising or minimising
-        best_score = 10
-        for key in board.keys():
-            if board[key] == ' ':
-                board[key] = player2
-                score = minimax_help(board, True)  # the algorithm is maximising
-                board[key] = ' '
-                if score < best_score:
-                    best_score = score
-        return best_score
-
-def player_help():
-    best_score = -10  # initialising variables
-    best_move = 0
-    for key in board.keys():
-        if board[key] == ' ':
-            board[key] = player1
-            score = minimax_help(board, False)
-            board[key] = ' '
-            if score > best_score:
-                best_score = score
-                best_move = key
-                print("the best move is", best_move)
-
-
 
 # Main program
 print("Mini project by Avi-Niam Popat: 20042651")
@@ -211,7 +167,6 @@ if players == 1:
         print("Basic bot game: ")
         while not check_win():
             basic_bot()
-            player_help()
             player1_move()
 
     elif bot_mode == 2:
@@ -219,7 +174,6 @@ if players == 1:
         print("Unbeatable bot game: ")
         while not check_win():
             unbeatable_bot()
-            player_help()
             player1_move()
 
 elif players == 2:
